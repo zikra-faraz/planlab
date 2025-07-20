@@ -1,0 +1,6 @@
+Route Pattern	Access Role
+/org/:orgId/admin	ADMIN only
+/org/:orgId/settings	ADMIN only
+/org/:orgId/board	MEMBER + ADMIN
+/org/:orgId/projects	MEMBER + ADMIN
+/org/:orgId/... of other orgs	❌ DENY

@@ -1,0 +1,22 @@
+[
+  {
+    "id": 1,
+    "title": "Create a project",
+    "description": "Start by creating a new project to manage your tasks and team workflow."
+  },
+  {
+    "id": 2,
+    "title": "Invite your team",
+    "description": "Bring your teammates onboard by sending invites and assigning roles."
+  },
+  {
+    "id": 3,
+    "title": "Add tasks and assign owners",
+    "description": "Break down the work into tasks, and assign them to the right people."
+  },
+  {
+    "id": 4,
+    "title": "Track progress and deadlines",
+    "description": "Monitor your team’s progress and stay on schedule with clear deadlines."
+  }
+]
