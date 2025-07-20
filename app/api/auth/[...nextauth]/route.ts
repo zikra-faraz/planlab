@@ -11,6 +11,7 @@ import { cookies } from "next/headers";
 
 export const authOptions: NextAuthOptions = {
   // adapter: PrismaAdapter(db),
+  secret: process.env.NEXTAUTH_SECRET,
   providers: [
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID!,
