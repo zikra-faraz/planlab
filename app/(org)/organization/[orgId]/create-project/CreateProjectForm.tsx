@@ -10,7 +10,11 @@ import { Button } from "@/components/ui/button";
 import { createProject } from "@/actions/project";
 import { projectSchema, ProjectSchemaType } from "@/app/(org)/lib/validators";
 import useFetch from "@/hooks/useFetch";
+import { useOrgUser } from "@/context/OrgUserProvider";
 const CreateProjectForm = ({ orgId }: { orgId: string }) => {
+  const orgUser = useOrgUser();
+  console.log(orgUser);
+
   const {
     register,
     handleSubmit,

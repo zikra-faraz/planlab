@@ -4,12 +4,17 @@ import ProjectList from "../../components/ProjectList";
 import { Button } from "@/components/ui/button";
 import { useOrg } from "@/context/orgByIdProvider";
 import { Plus, Settings } from "lucide-react";
+
 import Link from "next/link";
 import { useOrgUser } from "@/context/OrgUserProvider";
 export default function Organization() {
   const orgData = useOrg();
+  // console.log(orgData);
+
   const projects = useProjects();
   const slug = orgData?.slug;
+  // console.log(slug);
+
   const userOrgData = useOrgUser();
   const isAdmin = userOrgData?.role == "ADMIN";
   // console.log(userOrgData);
@@ -24,15 +29,17 @@ export default function Organization() {
               Organization
             </h1>
           </div>
-          {isAdmin && (
+          {isAdmin && slug && (
             <>
               {" "}
               <div>
                 <Link
-                  href={`/organization/${slug}/admin/settings`}
+                  href={`/organization/${slug}/settings`}
                   className="flex items-center gap-1 py-2 px-3  border-2 rounded-xl "
                 >
-                  <Settings size={16} /> Settings
+                  <Button variant="ghost">
+                    <Settings size={16} /> Settings
+                  </Button>
                 </Link>
               </div>
             </>
@@ -40,12 +47,10 @@ export default function Organization() {
         </div>
         {isAdmin && (
           <div className="mb-4 ">
-            <Link href={`/organization/${slug}/admin/create-project`}>
+            <Link href={`/organization/${slug}/create-project`}>
               <Button className="flex items-center gap-2 bg-purple-600 hover:bg-purple-500 cursor-pointer ">
                 <Plus size={18} className="text-white" />
-                <span className="hidden md:inline text-white">
-                  Create Project
-                </span>
+                <span className=" md:inline text-white">Create Project</span>
               </Button>
             </Link>
           </div>

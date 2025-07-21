@@ -4,16 +4,10 @@ import { getToken } from "next-auth/jwt";
 import { getUserFromSessionRole } from "./auth/roleSession";
 
 export async function middleware(request: NextRequest) {
-  const response = (await middlewareAuth(request)) ?? NextResponse.next();
+  const authResult = await middlewareAuth(request);
+  if (authResult) return authResult;
 
-  // await updateUserSessionExpiration({
-  //   set: (key, value, options) => {
-  //     response.cookies.set({ ...options, name: key, value })
-  //   },
-  //   get: key => request.cookies.get(key),
-  // })
-
-  return response;
+  return NextResponse.next();
 }
 
 async function middlewareAuth(request: NextRequest) {
@@ -37,6 +31,8 @@ async function middlewareAuth(request: NextRequest) {
   const role = await getUserFromSessionRole(request.cookies);
   // console.log(role);
 
+  // console.log(role);
+
   // const nextAuthToken = await getToken({
   //   req: request,
   //   secret: process.env.NEXTAUTH_SECRET,
@@ -46,14 +42,14 @@ async function middlewareAuth(request: NextRequest) {
     return NextResponse.redirect(new URL("/sign-in", request.url));
   }
 
-  if (isAdminRoute && !role) {
-    if (role?.role !== "ADMIN") {
-      return NextResponse.redirect(new URL("/", request.url));
-    }
-    // if (user.role !== "admin") {
-    //   return NextResponse.redirect(new URL("/", request.url))
-    // }
-  }
+  // if (isAdminRoute) {
+  //   if (!role || role?.role !== "ADMIN") {
+  //     return NextResponse.redirect(new URL("/", request.url));
+  //   }
+  // }
+  // if (user.role !== "admin") {
+  //   return NextResponse.redirect(new URL("/", request.url))
+  // }
 }
 
 export const config = {

@@ -4,6 +4,7 @@ import { OrgByIdProvider } from "@/context/orgByIdProvider";
 import {
   getCurrentUserOrg,
   getOrganizationBySlug,
+  restoreUserSessionFromOrg,
 } from "@/actions/organization";
 import { GetProjectsProvider } from "@/context/getProjectsProvider";
 import { getProjectsByOrgId } from "@/actions/project";
@@ -16,6 +17,7 @@ const OrgLayout = async ({
   params: Promise<{ orgId: string }>;
 }) => {
   const { orgId } = await params;
+
   const org = await getOrganizationBySlug(orgId);
 
   const projects = await getProjectsByOrgId(org?.id);
